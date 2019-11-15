@@ -1,0 +1,6 @@
+control/GeneroFacade.class
+control/PeliculaFacade.class
+control/DirectorFacade.class
+control/AbstractFacade.class
+control/Jasper.class
+boundary/Dashboard.class

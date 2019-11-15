@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3">
+                <p:outputLabel for="genero" value="Buscar genero por nombre"/>
+                <p:autoComplete id="genero" value="#{dashboardBean.nombre}" completeMethod="#{dashboardBean.complete}" var="genero" itemLabel="#{genero.nombre}" itemValue="#{genero.nombre}" />
+                <p:commandButton value="Buscar" update=":tablaPeliculas"/>
+            </h:panelGrid>
+        </h:form>
+        
+        <h:form id="tablaPeliculas">
+            <p:dataTable rendered="#{dashboardBean.nombre != null}" value="#{dashboardBean.peliculaPorGenero}" var="p" rows="5" paginator="true"
+                          selectionMode="single" selection="#{dashboardBean.pelicula}" rowKey="#{p.idPelicula}">
+                <p:column headerText="Titulo">
+                    <h:outputText value="#{p.titulo}"/>
+                </p:column>
+                <p:column headerText="Duracion">
+                    <h:outputText value="#{p.duracion}"/>
+                </p:column>
+                <p:column headerText="Director">
+                    <h:outputText value="#{p.idDirector.nombre} #{p.idDirector.apellido}"/>
+                </p:column>
+                <p:ajax event="rowSelect" oncomplete="PF('modal').show();"/>
+            </p:dataTable>
+        </h:form>
+        
+        <p:dialog  widgetVar="modal" modal="true" resizable="false" showEffect="fade" hideEffect="fade" appendTo="@(body)">
+            Informacion de Directores <p:commandButton value="Reporte"  actionListener="#{dashboardBean.gnerarReporteDirectores()}"/>
+            <h:panelGrid columns="2">
+                <p:outputLabel for="desde" value="Desde:"/>
+                <p:calendar id="desde" value="#{dashboardBean.desde}" showOn="button" navigator="true" pattern="yyyy-MMM-dd"/>
+                <p:outputLabel for="hasta" value="Hasta:"/>
+                <p:calendar id="hasta" value="#{dashboardBean.hasta}" showOn="button" navigator="true" pattern="yyyy-MMM-dd"/>
+            </h:panelGrid>
+           Informacion de Peliculas <p:commandButton value="Reporte"  actionListener="#{dashboardBean.gnerarReporteDirectores()}"/>
+            <p:ajax event="close"  update=":tablaPeliculas"/>
+        </p:dialog>
+    </h:body>
+</html>
+
