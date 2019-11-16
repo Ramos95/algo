@@ -53,12 +53,12 @@ public class Jasper extends HttpServlet {
             InputStream report = null;
 
             if (request.getParameter("reporte").equals("director")) {
-                report = getClass().getResourceAsStream("/recursosJasper/Director.jasper");
-            } else if (request.getParameter("reporte").equals("funcion")) {
+                report = getClass().getResourceAsStream("/recursosJasper/ReporteDirector.jasper");
+            } else if (request.getParameter("reporte").equals("pelicula")) {
                // parametros.put("id_Sala", Integer.parseInt(request.getParameter("sala")));
-                parametros.put("desde", request.getParameter("desde"));
-                parametros.put("hasta", request.getParameter("hasta"));
-                report = getClass().getResourceAsStream("/recursosJasper/pelicula.jasper");
+                parametros.put("Parameter1", request.getParameter("desde"));
+                parametros.put("Parameter2", request.getParameter("hasta"));
+                report = getClass().getResourceAsStream("/recursosJasper/ReporteFechas.jasper");
             }
             
             JasperPrint impresor = JasperFillManager.fillReport(report, parametros, conexion);

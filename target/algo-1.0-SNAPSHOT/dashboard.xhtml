@@ -31,17 +31,20 @@
             </p:dataTable>
         </h:form>
         
-        <p:dialog  widgetVar="modal" modal="true" resizable="false" showEffect="fade" hideEffect="fade" appendTo="@(body)">
-            Informacion de Directores <p:commandButton value="Reporte"  actionListener="#{dashboardBean.gnerarReporteDirectores()}"/>
+        
+        <p:dialog widgetVar="modal" modal="true" resizable="false" showEffect="fade" hideEffect="fade" appendTo="@(body)">
+            <h:form>  
+           Informacion de Directores <p:commandButton value="Reporte"  actionListener="#{dashboardBean.gnerarReporteDirectores}"/>
             <h:panelGrid columns="2">
                 <p:outputLabel for="desde" value="Desde:"/>
-                <p:calendar id="desde" value="#{dashboardBean.desde}" showOn="button" navigator="true" pattern="yyyy-MMM-dd"/>
+                <p:inputMask id="desde" value="#{dashboardBean.desde}" mask="9999-99-99"/>
                 <p:outputLabel for="hasta" value="Hasta:"/>
-                <p:calendar id="hasta" value="#{dashboardBean.hasta}" showOn="button" navigator="true" pattern="yyyy-MMM-dd"/>
+                <p:inputMask id="hasta" value="#{dashboardBean.hasta}" mask="9999-99-99"/>
             </h:panelGrid>
-           Informacion de Peliculas <p:commandButton value="Reporte"  actionListener="#{dashboardBean.gnerarReporteDirectores()}"/>
-            <p:ajax event="close"  update=":tablaPeliculas"/>
+            Informacion de Peliculas <p:commandButton value="Reporte"  actionListener="#{dashboardBean.generarReportePeliculas}"/>
+        </h:form>
         </p:dialog>
+      
     </h:body>
 </html>
 

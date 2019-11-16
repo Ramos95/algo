@@ -36,12 +36,12 @@ public class Dashboard implements Serializable {
     private Genero genero;
     
     
-    private Date desde;
-    private Date hasta;
+    private String desde;
+    private String hasta;
     private String nombre;
     
-     public List<Genero> complete(String nombre){
-        return generoFacade.complete(nombre);
+     public List<Genero> complete(String name){
+        return generoFacade.complete(name);
     }
     
      
@@ -51,13 +51,15 @@ public class Dashboard implements Serializable {
      
      public void gnerarReporteDirectores(){
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("Jasper?reporte=asiento");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Jasper?reporte=director");
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void generarReportePeliculas(){
+        System.out.println(desde);
+        System.out.println(hasta);
       try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("Jasper?reporte=pelicula"+"&desde=" + desde + "&hasta=" + hasta);
         } catch (IOException ex) {
@@ -82,19 +84,19 @@ public class Dashboard implements Serializable {
         this.genero = genero;
     }
 
-    public Date getDesde() {
+    public String getDesde() {
         return desde;
     }
 
-    public void setDesde(Date desde) {
+    public void setDesde(String desde) {
         this.desde = desde;
     }
 
-    public Date getHasta() {
+    public String getHasta() {
         return hasta;
     }
 
-    public void setHasta(Date hasta) {
+    public void setHasta(String hasta) {
         this.hasta = hasta;
     }
 
